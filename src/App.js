@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ListItems from './ListItems'
+import listItems from './listItems.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
@@ -58,12 +58,13 @@ class App extends React.Component{
   setUpdate(text,key){
     console.log("items:"+this.state.items);
     const items = this.state.items;
-    items.map(item=>{      
-      if(item.key===key){
-        console.log(item.key +"    "+key)
-        item.text= text;
-      }
-    })
+    // eslint-disable-next-line array-callback-return
+    items.map(function (item) {
+        if (item.key === key) {
+          console.log(item.key + "    " + key);
+          item.text = text;
+        }
+      })
     this.setState({
       items: items
     })  
@@ -74,11 +75,11 @@ class App extends React.Component{
     <div className="App">
       <header>
         <form id="todolist" onSubmit={this.addItem}>
-          <input type="text" placeholder="Enter task" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
+          <input type="text" placeholder="enter task..." value= {this.state.currentItem.text} onChange={this.handleInput}></input>
           <button type="submit">ADD</button>
         </form>
         <p>{this.state.items.text}</p>
-          <ListItems items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
+          <listItems items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
       </header>
     </div>
   );
